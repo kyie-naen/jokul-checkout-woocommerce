@@ -23,8 +23,8 @@ class WC_Jokul_Checkout_Gateway extends WC_Payment_Gateway
         $this->title              = $this->get_option( 'jokul_title' );
         $this->description        = $this->get_option( 'jokul_description' );
         $this->environmentJC      = $this->get_option( 'select_jokul_environment' );
-        $this->clientidJC          = ($this->environment == 'production') ? $this->get_option( 'client_id_production' ) : $this->get_option( 'client_id_sandbox' );
-        $this->secretkeyJC         = ($this->environment == 'production') ? $this->get_option( 'secret_key_production' ) : $this->get_option( 'secret_key_sandbox' );
+        $this->clientidJC          = ($this->environmentJC == 'production') ? $this->get_option( 'client_id_production' ) : $this->get_option( 'client_id_sandbox' );
+        $this->secretkeyJC         = ($this->environmentJC == 'production') ? $this->get_option( 'secret_key_production' ) : $this->get_option( 'secret_key_sandbox' );
         $this->expirypaymentJC     = $this->get_option( 'expiry_payment' );
         // $this->emailNotifications = $this->get_option('email_notifications');
 
@@ -78,7 +78,6 @@ class WC_Jokul_Checkout_Gateway extends WC_Payment_Gateway
     public function process_payment($order_id)
     {
         global $woocommerce;
-
         $order  = wc_get_order($order_id);
         $amount = $order->order_total;
         $lineItem = array();
